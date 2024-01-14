@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Link,
-  useHistory
+  useNavigate
 } from "react-router-dom";
 
 export default function Navbar({ userToken, setUserToken, pages }) {
 
-  const history = useHistory();
+  const history = useNavigate();
 
   return (
     <div>

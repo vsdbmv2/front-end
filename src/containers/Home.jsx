@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Card, Col, Row, CardDeck } from 'react-bootstrap';
-import PageHeader from '../components/PageTitle.js';
+import { Container, Card, Col, Row, CardGroup } from 'react-bootstrap';
+import PageHeader from '../components/PageTitle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ export default function Home() {
       <PageHeader text="VSDBM - Viral Sequence Database Manager" />
       <Col lg="12">
         <Row>
-          <CardDeck>
+          <CardGroup>
             <NewCard aside>
               <Card.Body>
                 <h4>
@@ -42,19 +42,18 @@ export default function Home() {
                   <ul>
                     <li>Irahe Kasprzykowski - Developer</li>
                     <li>Helton Fábio - Developer</li>
-                    <li>Anthony Weil - Business Advisor</li>
                     <li>Artur Queiroz - Scientific Advisor</li>
                   </ul>
                     The Backend module runs all analysis on a week or demand basis. This module collect all new sequences from main primary biological databases; Process it by mapping it with the complete anotated genome; Subtyping it using subtype groups pre-determined in literature and map all epitopes contained in IEDB. All data is stored in Database model and can be accessed by the frontend via REST services.
                 </NewCardBody>
               </Card.Body>
             </NewCard>
-          </CardDeck>
+          </CardGroup>
         </Row>
       </Col>
       <Col lg="12" style={{ marginTop: '20px' }}>
         <Row>
-          <CardDeck>
+          <CardGroup>
             <NewCard aside>
               <Card.Body>
                 <h4>
@@ -71,15 +70,15 @@ export default function Home() {
               <Card.Body>
                 <h4>
                   <NewCardTitle className="title-box">
-                    Who mantain it <FontAwesomeIcon icon={faQuestion} />
+                    Who maintain it <FontAwesomeIcon icon={faQuestion} />
                   </NewCardTitle>
                 </h4>
                 <NewCardBody>
-                  This software is maintained by PAH (Highthroughtput Analysis Platform) group in association with FIOCRUZ (Oswaldo Cruz Foundation) - BA
+                  This software is maintained by PAH (High throughput Analysis Platform) group in association with FIOCRUZ (Oswaldo Cruz Foundation) - BA
                 </NewCardBody>
               </Card.Body>
             </NewCard>
-          </CardDeck>
+          </CardGroup>
         </Row>
       </Col>
     </NewContainer>

@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Container, Card, Row, Col, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 import colors from '../static/colors.js';
 
 import { connect } from 'react-redux';
-import { MapDispatch } from '../store';
+import { MapDispatch } from '../store/index.js';
 import api from '../services/api.js';
 
-import LineChart from '../components/Spline Chart';
+import LineChart from '../components/Spline Chart.jsx';
 import { VectorMap } from 'react-jvectormap';
 
+import { getCode, getName } from 'country-list';
+
 import '../static/css/map.css';
+import countries from '../static/countries.js';
 
-function DatabaseStatus({ userToken, virus, viruses, response }) {
-  const { getCode, getName } = require("country-list");
-  const countries = require('../static/countries.js');
-
+const DatabaseStatus = ({ userToken, virus, viruses, response }) => {
   const [virusData, setVirusData] = useState(virus || { name: '', sequences_amount: 0 });
   const [chartPoints, setChartPoints] = useState(null);
   const [woldData, setWorldData] = useState({});

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import api from '../services/api.js';
 import { connect } from 'react-redux';
-import { MapDispatch } from '../store';
+import { MapDispatch } from '../store/index.js';
 
-import PageHeader from '../components/PageTitle.js';
+import PageHeader from '../components/PageTitle';
 
 import colors from '../static/colors.js';
 

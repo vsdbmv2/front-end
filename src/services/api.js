@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 // export const BASE_URL = "https://saga.bahia.fiocruz.br/api";
 export const BASE_URL = "http://localhost:4242";
 

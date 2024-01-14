@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
-import { Route, Switch, Link, NavLink, useHistory } from "react-router-dom";
+import { useEffect } from 'react';
+import { Route, Routes, Link, NavLink, useNavigate } from "react-router-dom";
 
-import { Navbar, Nav, NavDropdown, Button, Container } from 'react-bootstrap';
+import { Navbar, Nav, Button, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faDatabase, faDna, faSyringe, faTools, faHdd, faUsers } from '@fortawesome/free-solid-svg-icons';
 import Logo from './static/img/logo.svg';
 
-import { connect } from 'react-redux';
-
-import { MapDispatch } from './store/index';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { logoff, response } from './store/actions';
 
 // import Navbar from './components/Navbar.js';
 import {
@@ -23,8 +21,14 @@ import {
   Login
 } from './containers';
 
-function App({ userToken, userData, logoff, logado, response }) {
-  const history = useHistory();
+function App() {
+  const history = useNavigate();
+  const dispatch = useDispatch();
+
+  const userToken = useSelector((state) => state.userToken);
+  const userData = useSelector((state) => state.userData);
+  const logado = useSelector((state) => state.logado);
+
   const pages = [
     {
       label: 'Home',
@@ -63,7 +67,7 @@ function App({ userToken, userData, logoff, logado, response }) {
       component: Tools
     },
     {
-      label: 'Retreive Data',
+      label: 'Retrieve Data',
       url: '/retrieve',
       icon: faHdd,
       component: Retrieve
@@ -73,20 +77,15 @@ function App({ userToken, userData, logoff, logado, response }) {
   const logout = () => {
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('userData');
-    logoff();
+    dispatch(logoff());
     history.push('/login');
   };
 
   useEffect(() => {
-    if (!userToken) {
-      let token = JSON.parse(window.localStorage.getItem('token'));
-      // console.log('token', token);
-      if (token) {
-        response('userToken', token)
-      }
-    } else {
-      // console.log('logado');
-    }
+    if (userToken) return
+    let token = JSON.parse(window.localStorage.getItem('token'));
+    // console.log('token', token);
+    if (token) response('userToken', token)
   }, [response, userToken]);
 
   if (!logado && !userToken && !userData) {
@@ -118,49 +117,14 @@ function App({ userToken, userData, logoff, logado, response }) {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <Switch>
-          {pages.map((page, index) => <Route path={page.url} component={page.component} key={index} exact />)}
-          <Route path="/home" component={Home} exact />
-          <Route path="*" component={Home} />
-        </Switch>
+        <Routes>
+          {pages.map((page, index) => <Route path={page.url} element={<page.component />} key={index} exact />)}
+          <Route path="/home" element={<Home />} exact />
+          <Route path="/" element={<Home />} />
+        </Routes>
       </>
     )
   }
 }
-const mapStateToProps = ({ userToken, logado }) => ({ userToken, logado });
 
-export default connect(mapStateToProps, MapDispatch)(App);
-
-// pages.map(page =>
-//   <Route path={page.url} key={page.url} exact>
-//     {page.component}
-//   </Route>
-// )
-
-// <Route path='/database_status'>
-//             <DatabaseStatus />
-//           </Route>
-
-//           <Route path='/sequence_mapping'>
-//             <DatabaseStatus />
-//           </Route>
-
-//           <Route path='/sequence_subtyping'>
-//             <DatabaseStatus />
-//           </Route>
-
-//           <Route path='/epitopes'>
-//             <DatabaseStatus />
-//           </Route>
-
-//           <Route path='/tools'>
-//             <DatabaseStatus />
-//           </Route>
-
-//           <Route path='/retrieve'>
-//             <DatabaseStatus />
-//           </Route>
-
-//           <Route path='/'>
-//             <Home />
-//           </Route>
+export default App;

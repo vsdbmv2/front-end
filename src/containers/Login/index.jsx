@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { response, login } from '../../store/actions.js';
 
 export const Login = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch()
 
   const userToken = useSelector((store) => store.userToken);
@@ -88,7 +88,7 @@ export const Login = () => {
   const loginAndRedirect = (token, userData) => {
     dispatch(login(token, userData));
     dispatch(response('logado', true));
-    history.push('/home');
+    navigate('/home');
   }
 
   const forgot = e => {

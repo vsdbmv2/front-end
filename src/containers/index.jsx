@@ -6,3 +6,4 @@ export { default as Retrieve} from './Retrieve.jsx';
 export { default as SequenceMapping} from './SequenceMapping.jsx';
 export { default as SequenceSubtyping} from './SequenceSubtyping.jsx';
 export { default as Tools} from './Tools.jsx';
+export { default as ProcessData} from './ProcessData.jsx';

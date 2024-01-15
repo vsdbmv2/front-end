@@ -3,7 +3,7 @@ import { Route, Routes, Link, NavLink, useNavigate } from "react-router-dom";
 
 import { Navbar, Nav, Button, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faDatabase, faDna, faSyringe, faTools, faHdd, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faDatabase, faDna, faSyringe, faTools, faHdd, faUsers, faServer } from '@fortawesome/free-solid-svg-icons';
 import Logo from './static/img/logo.svg';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,11 +18,12 @@ import {
   SequenceMapping,
   SequenceSubtyping,
   Tools,
-  Login
+  Login,
+  ProcessData
 } from './containers';
 
 function App() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const userToken = useSelector((state) => state.userToken);
@@ -72,13 +73,19 @@ function App() {
       icon: faHdd,
       component: Retrieve
     },
+    {
+      label: 'Process data',
+      url: '/process',
+      icon: faServer,
+      component: ProcessData
+    },
   ]
 
   const logout = () => {
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('userData');
     dispatch(logoff());
-    history.push('/login');
+    navigate('/login');
   };
 
   useEffect(() => {

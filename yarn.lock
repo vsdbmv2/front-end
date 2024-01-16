@@ -724,7 +724,7 @@
     "@types/babel__core" "^7.20.5"
     react-refresh "^0.14.0"
 
-"@vsdbmv2/mapping-library@^0.0.71":
+"@vsdbmv2/mapping-library@^0.0.72":
   version "0.0.71"
   resolved "https://npm.pkg.github.com/download/@vsdbmv2/mapping-library/0.0.71/070cd67b0cbebc23fd24af372d5ea7954eb0503b#070cd67b0cbebc23fd24af372d5ea7954eb0503b"
   integrity sha512-cFYEVPEv8AlS6Jemr11KEVzGx3urjZXTwGWt+9oQKQicHJ38Tcf7+/GahWMetJm9wu0LWev7Bk6N9n0G/2BI7A==

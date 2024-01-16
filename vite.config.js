@@ -8,4 +8,7 @@ export default defineConfig({
     react(),
     macrosPlugin()
   ],
+  server: {
+    port: 3000
+  }
 })

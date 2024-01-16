@@ -20,7 +20,6 @@ export const Login = () => {
   const userToken = useSelector((store) => store.userToken);
   const userData = useSelector(store => store.userData);
   const logado = useSelector(store => store.logado);
-  console.log({userToken, userData, logado, login})
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

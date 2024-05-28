@@ -20,13 +20,13 @@ export default function Home() {
                   </NewCardTitle>
                 </h4>
                 <NewCardBody>
-                  VSDBM is a high performance hybrid multi-platform multi-language tool to colect, analyse and store viral genomic sequences on demand. It is composed of three main modules:
+                  VSDBM is a high performance hybrid multi-platform multi-language tool to collect, analise and store viral genomic sequences on demand. It is composed of three main modules:
                   <ul>
                     <li>Backend module</li>
                     <li>Database module</li>
                     <li>Frontend module</li>
                   </ul>
-                    The Backend module runs all analysis on a week or demand basis. This module collect all new sequences from main primary biological databases; Process it by mapping it with the complete anotated genome; Subtyping it using subtype groups pre-determined in literature and map all epitopes contained in IEDB. All data is stored in Database model and can be accessed by the frontend via REST services.
+                    The Backend module runs all analysis on a week or demand basis. This module collect all new sequences from main primary biological databases; Process it by mapping it with the complete annotated genome; Subtyping it using subtype groups pre-determined in literature and map all epitopes contained in IEDB. All data is stored in Database model and can be accessed by the frontend via REST services.
                 </NewCardBody>
               </Card.Body>
             </NewCard>
@@ -40,11 +40,11 @@ export default function Home() {
                 <NewCardBody>
                   Many have contributed to the development, thinking, brainstorming, creation and availability of this tool. Unfortunately there is no way to get all names here. However, i will try to bring the main minds behind VSDBM and it´s tools.
                   <ul>
-                    <li>Irahe Kasprzykowski - Developer</li>
                     <li>Helton Fábio - Developer</li>
+                    <li>Irahe Kasprzykowski - Developer</li>
                     <li>Artur Queiroz - Scientific Advisor</li>
                   </ul>
-                    The Backend module runs all analysis on a week or demand basis. This module collect all new sequences from main primary biological databases; Process it by mapping it with the complete anotated genome; Subtyping it using subtype groups pre-determined in literature and map all epitopes contained in IEDB. All data is stored in Database model and can be accessed by the frontend via REST services.
+                    The Backend module runs all analysis on a week or demand basis. This module collect all new sequences from main primary biological databases; Process it by mapping it with the complete annotated genome; Subtyping it using subtype groups pre-determined in literature and map all epitopes contained in IEDB. All data is stored in Database model and can be accessed by the frontend via REST services.
                 </NewCardBody>
               </Card.Body>
             </NewCard>
@@ -62,7 +62,7 @@ export default function Home() {
                   </NewCardTitle>
                 </h4>
                 <NewCardBody>
-                  Please contact our main researcher at <a href="mailto:irahe22@gmail.com">irahe22@gmail.com</a>
+                  Please contact our main researcher at <a href="mailto:heltonfabio@outlook.com">heltonfabio@outlook.com</a>
                 </NewCardBody>
               </Card.Body>
             </NewCard>

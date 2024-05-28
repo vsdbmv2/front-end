@@ -62,7 +62,6 @@ export default function ProcessData() {
 
   useEffect(() => {
     if(!processed) return;
-    console.log('storing', processed);
     window.localStorage.setItem("processed-data", JSON.stringify(processed))
   },[processed])
 
@@ -152,14 +151,21 @@ export default function ProcessData() {
             <li>Connected clients: {clients}</li>
             <li>latency: <PingSpan client={client} /></li>
             <li>works per time: {worksAmount} </li>
-            <li>
+            <li style={{position: 'relative'}}>
               <FormRange
-              style={{width: 120}}
+              style={{width: '100%'}}
               value={worksAmount}
               onChange={(e) => setWorksAmount(e.target.value)}
               min={1}
               max={(navigator?.hardwareConcurrency ?? 8)*4}
               />
+              <label htmlFor="range">{1}</label>
+              <label htmlFor="range" style={{
+                position: 'absolute',
+                left: `calc(${worksAmount / ((navigator?.hardwareConcurrency ?? 8)*4)} * 100%)`,
+                transform: 'translate(-100%)'
+                }}>{worksAmount}</label>
+              <label htmlFor="range" style={{float: 'right'}}>{(navigator?.hardwareConcurrency ?? 8)*4}</label>
               </li>
               <hr />
               <li>running now {currentWorks.length} works</li>

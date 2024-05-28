@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Container, Card, Row, Col, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 import colors from '../static/colors.js';
@@ -24,6 +24,8 @@ const DatabaseStatus = ({ userToken, virus, viruses, response }) => {
   const [translationAmount, setTranslationAmount] = useState(null);
   const [epitopesInfos, setEpitopesInfos] = useState(null);
   const [focused, setFocused] = useState('');
+
+  const globalMapRef = useRef(null);
 
   // useEffect(() => {
   //   setInterval(() => {
@@ -71,10 +73,24 @@ const DatabaseStatus = ({ userToken, virus, viruses, response }) => {
     let data = await request('/sequence/count/day/');
     let values = data.data.map(element => ({ x: new Date(element.creationdate), y: element.count }));
     let accumulator = 0;
+    let pandemicAdvice = false
+    const isPandemicDate = (date) => {
+      if (date.getFullYear() > 2019){
+        return date.getFullYear() === 2020 && date.getMonth() === 0;
+      }
+      return date.getFullYear() === 2019 && date.getMonth() === 11;
+    }
     values.forEach(element => {
+      if (virus.refseq === 'NC_045512.2' && isPandemicDate(element.x) && !pandemicAdvice){
+        element.indexLabel= "pandemic beginning"
+        element.markerColor= "red"
+        element.markerType= "triangle"
+        pandemicAdvice = true
+      }
       element.y += accumulator;
       accumulator = element.y;
     })
+    console.log({values})
     setChartPoints(values);
   }
 
@@ -170,8 +186,6 @@ const DatabaseStatus = ({ userToken, virus, viruses, response }) => {
   }, [virus])
 
   const composePage = async () => {
-    console.log('compose?');
-    console.log('virus', virus);
     plotGrowthGraph();
     plotWorldGraph();
     getCoverageData();
@@ -280,29 +294,49 @@ const DatabaseStatus = ({ userToken, virus, viruses, response }) => {
                 <span style={{ fontSize: '22px', fontWeight: "bold" }}>Sequence Submission</span>
               </Card.Header>
               <Card.Body>
-                <div dangerouslySetInnerHTML={{ __html: hoverLabel }} style={{ display: 'inline-block', fontWeight: 'bold', fontSize: '16px', color: colors.color0 }} />
+                <span
+                className={`badge badge-${hoverLabel?.includes(': 0') ? 'danger' : 'primary'}`}
+                style={{ position: 'relative', display: 'inline-block', fontWeight: 'bold', fontSize: '16px', color: colors.color0 }}
+                >{hoverLabel ?? 'Select a country'}</span>
                 {(Object.keys(woldData).length > 0) ?
                   <div style={{ width: 1068, height: 700 }}>
                     <VectorMap
                       map={"world_mill"}
+                      ref={(map) => {
+                        if(globalMapRef.current) {
+                          globalMapRef.current.tip.remove();
+                        }
+                        if(map) {
+                          globalMapRef.current = map.$mapObject
+                        }
+                      }}
+                      containerClassName="map"
                       backgroundColor={colors.color7} //change it to ocean blue: #0077be
                       zoomOnScroll={true}
                       containerStyle={{
                         width: '100%',
                         height: '100%'
                       }}
-                      zoomButtons={false}
-
-                      // onRegionTipShow={
+                      zoomButtons={true}
+                      onRegionOver={
+                        function(evt, country) {
+                          const message = `${getName(country)}: ${woldData?.[country] ?? 0}`;
+                          // console.log({evt, country})
+                          setHoverLabel(message);
+                          evt.preventDefault();
+                        }
+                      }
+                      onRegionTipShow={(event, element, country) => {
+                        const message = `${getName(country)}: ${woldData?.[country] ?? 0}`;
+                        element.html(message);
+                      }}
                       onRegionClick={
                         function (evt, fn, country) {
-                          // console.log(evt);
-                          // console.log(fn);
                           evt.preventDefault();
                           setFocused(fn)
-                          // setHoverLabel(fn.html() + (woldData[country] ? ':  <span class="badge badge-primary">' + woldData[country] + '</span>' : ':  <span class="badge badge-warning">0</span>'))
-                          setHoverLabel(getName(fn) + (woldData[fn] ? ':  <span class="badge badge-primary">' + woldData[fn] + '</span>' : ':  <span class="badge badge-warning">0</span>'));
-                          Array.from(document.querySelectorAll('.jvectormap-tip')).forEach(element => element.parentNode.removeChild(element));
+                          const message = `${getName(country)}: ${woldData?.[country] ?? 0}`;
+                          setHoverLabel(message);
+                          // Array.from(document.querySelectorAll('.jvectormap-tip')).forEach(element => element.parentNode.removeChild(element));
                         }
                       }
                       setFocus={{
@@ -310,8 +344,8 @@ const DatabaseStatus = ({ userToken, virus, viruses, response }) => {
                         scale: 25,
                         animate: true
                       }}
-                      containerClassName="map"
                       regionStyle={{
+                        position: 'relative',
                         initial: {
                           fill: "#e4e4e4",
                           "fill-opacity": 0.9,

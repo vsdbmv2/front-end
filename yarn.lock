@@ -725,9 +725,9 @@
     react-refresh "^0.14.0"
 
 "@vsdbmv2/mapping-library@^0.0.72":
-  version "0.0.71"
-  resolved "https://npm.pkg.github.com/download/@vsdbmv2/mapping-library/0.0.71/070cd67b0cbebc23fd24af372d5ea7954eb0503b#070cd67b0cbebc23fd24af372d5ea7954eb0503b"
-  integrity sha512-cFYEVPEv8AlS6Jemr11KEVzGx3urjZXTwGWt+9oQKQicHJ38Tcf7+/GahWMetJm9wu0LWev7Bk6N9n0G/2BI7A==
+  version "0.0.72"
+  resolved "https://npm.pkg.github.com/download/@vsdbmv2/mapping-library/0.0.72/c668606733a5388476c1db71fb1ae27da8de51a4#c668606733a5388476c1db71fb1ae27da8de51a4"
+  integrity sha512-xX+cjQmmSI1jkg8EH046dpX53eNHVtYQPm64P3NTDbc2kHzzrexc7rJ0Hh/swjt/hwLZjCs+U4w1I2xlaI3mOQ==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
